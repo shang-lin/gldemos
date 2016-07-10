@@ -6,7 +6,7 @@ include include.mk
 all: shapes
 
 shapes: robot.h robot.cpp shapes.cpp
-	$(CC) robot.cpp shapes.cpp -o shapes $(LFLAGS)
+	$(CC) $(INCLUDES) robot.cpp shapes.cpp -o shapes $(LDFLAGS)
 
 clean:
 	-rm -f *.o
