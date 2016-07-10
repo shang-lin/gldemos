@@ -3,10 +3,12 @@
 
 include include.mk
 
-all: shapes
+all: shapes animate
+animate: robot.h robot.cpp animate.cpp
+	$(CC) robot.cpp animate.cpp -o animate $(INCLUDES) $(LDFLAGS)
 
 shapes: robot.h robot.cpp shapes.cpp
-	$(CC) $(INCLUDES) robot.cpp shapes.cpp -o shapes $(LDFLAGS)
+	$(CC) $(INCLUDES) robot.cpp shapes.cpp -o shapes $(INCLUDES) $(LDFLAGS)
 
 clean:
 	-rm -f *.o

@@ -10,6 +10,7 @@
 #include <GL/glu.h>
 #include <assert.h>
 
+
 /*
     This class represents a 3D robot with a head, a torso,
     and two legs.
@@ -18,8 +19,9 @@ class Robot{
 
 private:
     // Data members.
-    GLfloat angle;    // This is the angle between the robot's
-                      // legs and its torso when the robot walks.
+    GLfloat angle;       // This is the angle between the robot's
+                         // legs and its torso when the robot walks.
+    GLfloat csign;
 
     // These are the angles by which the robot is rotated about
     // the x and y axes.
@@ -34,16 +36,18 @@ private:
     void drawTorso();    // Draws the robot's upper body.
     void drawLegs();     // Draws the robot's legs.
     void drawHead();     // Draws the robot's head.
+    void drawArms();     // Draws the robot's arms.
+
+    // Draws a cube at the position x, y, z.
+    void drawCube(GLfloat x, GLfloat y, GLfloat z);
 
     void setup();        // Sets up the location where
                          // the robot is to be drawn.
+// Public methdods.
 public:
     Robot();
-    Robot(GLfloat a, GLfloat x, GLfloat y, GLfloat z);
-//             GLfloat z=0.0fGLfloat a,     // Constructor sets the angle and
-    
 
-    void draw();        // Draws the robot.
+    void draw();         // Draws the robot.
 
     // Increments angles of rotation.
     int incrementRotation(char axis, GLfloat incr);
@@ -52,4 +56,3 @@ public:
 
 
 #endif
-
