@@ -5,10 +5,16 @@
 
 */
 
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+
 #include "robot.h"
 
-// Function declarations.
 void render();
 void resize(GLsizei w, GLsizei h);
 void initialize();
@@ -16,11 +22,13 @@ void handleKeystroke(int key, int x, int y);
 
 // Global variables.
 static Robot *robot;
+static int xresol, yresol;
+
 
 // Main function.
 int main(int argc, char *argv[]){
     robot = new Robot();
-
+    xresol = 500; yresol = 500;
 
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInit(&argc, argv);
@@ -49,29 +57,33 @@ int main(int argc, char *argv[]){
 /*
     render().
     This function is called whenever the window is redrawn.
-    It draws a robot.
+    All it does is draw a robot.
 */
 void render(){
+    resize(xresol, yresol);
+
     // Clear the window and draw the robot.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //Set up the camera.
-    gluLookAt(0.0, 0.0, 300.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(0.0, 0.0, 40.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-    GLfloat light_pos[4] = {0.0f, 0.0f, 500.0f, 0.0f};
+    GLfloat light_pos[4] = {0.0f, 0.0f, 10.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
 
+
     // Draw the robot
+
     robot->draw();
 
     // Clear the OpenGL pipeline and execute all waiting
     // commands.
-    glutSwapBuffers();
+    glFlush();
+	glutSwapBuffers();
 }
 
-/*
-    resize.
 
+/*
     This function is called whenever the window is resized
     or maximized. The arguments are the width and height of
     the window.
@@ -87,21 +99,17 @@ void resize(GLsizei w, GLsizei h){
     // Prevent division by 0.
     if (h == 0)
         h = 1;
-    if (w == 0)
-        w = 1;
 
     // Reset the projection matrix to the identity matrix.
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    if (w <= h)
-        glOrtho(-250.0f, 250.0f, -250.0f*w/h, 250.0f*w/h, -300.0, 300.0);
-    else
-        glOrtho(-250.0f*h/w, 250.0f*h/w, -250.0f, 250.0f, -100.0f, 100.0f);
+    gluPerspective(85.0, (GLdouble)w / (GLdouble)h, 1.0, 150.0);
 
     // Reset the modelview matrix to the identity matrix.
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
 
 }
 
@@ -114,25 +122,28 @@ void initialize(){
     // Allow lighting and materials to have an effect.
     // By default, this is turned off. Once it is turned on,
     // lights and materials must be set for anything to appear.
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    // Draw the front surfaces as filled polygons.
+    glPolygonMode(GL_FRONT, GL_FILL);
+
     glShadeModel(GL_SMOOTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+
+    // Normalize normal vectors.
     glEnable(GL_NORMALIZE);
 
-    // Turn on color tracking. This allows material properties
-    // to be set using glColor.
-    //glEnable(GL_COLOR_MATERIAL);
+
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    //glFrontFace(GL_CCW);        // counterclockwise polygons are out
+    glEnable(GL_CULL_FACE);  // Don't draw back (inner) surfaces.
 
     GLfloat ambient_light[] = {0.5f, 0.5f, 0.5f, 1.0f};
     GLfloat diffuse_light[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
-    //glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
+    // Initialize the light.
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient_light);
-    //glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
 
 }
