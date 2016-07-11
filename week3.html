@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+   <head>
+      <title>
+         Week 3: Animation 1
+      </title>
+   </head>
+
+   <body>
+      <h1>
+         Week 3
+      </h1>
+
+      <p>
+      This week's program animates the robot so that its legs move as if walking
+      and its entire body is translated in the direction its walking. Pressing the
+      arrow keys rotate the robot and change its direction.
+      </p>
+
+      <p>
+      I had problems setting the perspective projection. Right now the program
+      uses an orthographic projection, which means that more distant objects do not
+      appear smaller. Perspective projections, which use a pyramid-like object called
+      a frustum to make projections, are more realistic because distant objects look
+      smaller, while closer objects look bigger. When I used 
+      <code>
+         gluPerspective
+      </code>
+
+      to set the frustum, I couldn't find values for the field-of-view angle, near distance, and far distance that would project the robot to a reasonable size.
+      </p>
+      <p>
+      Right now I'm still using orthographic projections, so when the robot walks
+      toward the viewer, it doesn't look bigger as it approaches.
+      </p>
+
+      <p>
+      In last week's program, it seemed that the light followed the robot around
+      so that the same face was always lit. It seems that this might be because of
+      the way normals are set up. I used 
+      <code>
+         gluSolidCube
+      </solid>
+      to draw the robot's
+      parts, so the normals were already set in that built-in function. In the next 
+      few days I'll try redrawing the cubes with polygons and setting my own normals
+      to see if that problem is fixed.
+      </p>
+
+      <h1>
+         May 2, 2003 Update
+      </h1>
+      <p>
+      I have posted a new version of the program as week3-2.tar.gz. The robot is now drawn by using quads
+      to form cubes that are then scaled. The normals are set manually so that now the lighting is correct. When
+      the robot rotates, surfaces are lit or dimmened depending on their position. The projection used is now 
+      an perspective projection. When the robot walks towards or away from the viewer, it now changes size depending
+      on the distance between it and the viewer. It turned out that earlier problems with using 
+      <code>
+         gluPerspective
+      </code>
+      had been caused by reloading the identity matrix in the Robot::setup() method.
+      </p>
+      <p>
+      <a href="files/week3/week3.tar.gz">Original week 3 files</a>
+      (.tar.gz format)
+      <br>
+      <a href="files/week3/week3-2.tar.gz">New week 3 files</a>
+      (.tar.gz format)
+      </p>
+
+      <hr>
+      <!-- Created: Tue Apr 29 17:36:18 PDT 2003 -->
+      <!-- hhmts start -->
+      Last modified: May 2, 2003 3:28:14 PM PST
+      <!-- hhmts end -->
+   </body>
+</html>

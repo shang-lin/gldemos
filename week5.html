@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!-- Created on May 16, 2003 3:34:57 PM -->
+
+<html>
+   <head>
+      <title>
+         Week 5
+      </title>
+      <meta name="GENERATOR" content="Arachnophilia 5.2">
+      <meta name="FORMATTER" content="Arachnophilia 5.2">
+   </head>
+
+   <body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#ff0000">
+
+      <b>Week 5 - Texture Mapping</b><br>
+<p>This week I added texture-mapped scenery to the background of the Roboviewer. Loading bitmap files
+requires writing some complicated code that I didn't have time for this week, so in this week's program
+I again created my own textures by storing pixel values in a 64x64x4 array. </p>
+<p>I also figured out how to use texture objects, which allow simultaneous multiple textures. To create 
+texture objects, first an array of GLuints needs to be created. <code>glGenTextures</code> is called on the
+array. The size of this array is the number of textures. Each element in the array can be bound to one 
+texture. Several texture object arrays can exist at one time. Since I can use multiple textures now, the textures
+on the robot's face and torso and the background textures coexist.</p>
+
+<p>F1 toggles the texture on the robot's torso. F2 cycles through the background scenes. The three backgroud
+scenes are grass with mountains, desert with mountains, and grass without mountains (sky only). This program
+runs slowly on my computer, so I didn't run any long-lasting tests. I'm not sure what would happen if the robot
+could walk all the way to the textured mountains in the background. Collision detection is an entirely different
+topic beyond the scope of this project, so it's not something handled in this program.</p>
+
+</p>
+
+   </body>
+</html>
+ 

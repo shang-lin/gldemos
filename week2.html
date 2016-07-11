@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Week 2</title>
+  </head>
+
+  <body>
+    <h1>Week 2</h1>
+
+    <p>This week's program displays an armless robot in a window. The robot's 
+body, head, and legs are constructed from differently colored cubes. The entire
+robot is rotated by pressing the arrow keys. The up and down arrows rotate the
+robot around the x-axis by a positive and negative angles, respectively. The 
+right and left arrows rotate the robot around the y-axis, also by positive and
+negative angles, respectively.</p>
+
+<p><b>OpenGL and GLUT Notes</b><br>
+When used with OpenGL, GLUT (OpenGL Utility Toolkit) adds user interface
+capabilities. GLUT handles user input, creates windows, and makes OpenGL easier
+to use without needing operating system-specific libraries and APIs (e.g. Win32
+or XWindows).</p>
+<p> OpenGL/GLUT programs normally begin by initializing the mode and
+creating the window. The mode determines whether the program is single-buffered
+or double-buffered and whether RGB colors are used. 
+<!-- Check on this. -->
+Single buffering means that
+everything is drawn and calculated in the same buffer, while in double 
+buffering, drawing and calculations take place in different buffers. Double
+buffering is usually used in complicated applications or animation.</p>
+
+<p><!-- Callback functions -->
+When GLUT is used with OpenGL, GLUT callback functions are set to indicate
+which functions should be called in which situation. Each callback function's 
+argument is a pointer to the corresponding user-defined function.
+The required callback functions are:
+<blockquote>
+<code>glutDisplayFunc</code> - Called whenever the window is redrawng.<br>
+<code>glutReshapeFunc</code> - Called whenever the window is resized.<br>
+</blockquote>
+Other callback functions handle keyboard and mouse input.
+</p>
+
+<p>In OpenGL, when a drawing color is set without any lighting parameters,
+objects are drawn with smooth, uniform shading. As a result, the different
+faces of a 3D object are difficult to distinguish unless you manually change
+the color for each face. If you want realistic shading, you must define light
+sources and material properties. The material properties of the object you 
+draw determine how light is reflected.
+</p>
+<p>The program I wrote displays a robot first with its dark face facing the
+viewer. Rotating the robot using the arrow keys turns it so that the bright face
+faces the viewer. It appears that the light rotates with the robot. (This still needs to be fixed.) 
+<p><b>Files</b><br>
+<a href="files/week2">Files</a></p>
+    <hr> 
+<!--    <address><a href="mailto:shang@ugcs.caltech.edu"></a></address> -->
+<!-- Created: Tue Apr 22 11:35:20 PDT 2003 -->
+<!-- hhmts start -->
+Last modified: Tue Apr 22 13:33:18 PDT 2003
+<!-- hhmts end -->
+  </body>
+</html>

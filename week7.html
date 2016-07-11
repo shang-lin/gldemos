@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!-- Created on May 30, 2003 1:22:42 PM -->
+
+<html>
+   <head>
+      <title>
+         Week 7
+      </title>
+      <meta name="GENERATOR" content="Arachnophilia 5.2">
+      <meta name="FORMATTER" content="Arachnophilia 5.2">
+   </head>
+
+   <body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#ff0000">
+
+      <p>This week I worked with texture mapping on a curved surface, texture mapping with lighting, and fog.
+To map a texture onto a curved surface, the texture needs to be bound with a call to <code>glBindTexture</code>
+within the same <code>glPushMatrix ... glPopMatrix</code> block as the drawing code for the surface. Environment
+variables also need to be set to allow mapping onto a curve. The code for setting these variables is as follows:
+<table><tr><td bgcolor="cccccc"><code><pre>
+glTexGenf(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+glTexGenf(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+glEnable(GL_S);
+glEnable(GL_T);
+</pre>
+</td></tr></table>
+<br>This code allows both the s and t coordinates of the texture to be mapped onto a spherical surface.
+</p>
+<p>In the last few weeks, the textures on the robot's torso and face did not support lighting. This was
+because lighting and shading only work on textures when the texture environment is in <code>GL_MODULATE</code>
+or <code>GL_BLEND</code> mode. <code>GL_MODULATE</code> modulates the color of the texture with the background
+color. <code>GL_BLEND</code> blends the texture color with the background color or a user-specified color
+array. Other environment modes disable lighting for mapped textures.</p>
+<p>Fog in OpenGL turned out to be quite easy to implement. OpenGL has a built-in fog feature activated with
+the following code:
+<table border=0><tr><td bgcolor="cccccc">
+<code><pre>
+glEnable(GL_FOG);
+glFogf(GL_FOG_MODE, GL_LINEAR); // Fog mode can be GL_LINEAR, GL_EXP, or GL_EXP2.
+                                // GL_LINEAR enables depth cueing.
+                                // GL_EXP is for heavy fog.
+                                // GL_EXP2 is for haze.
+glFogf(GL_FOG_DENSITY, 0.1f);
+glFogf(GL_FOG_START, 1.0f);  // Distance from camera where fog should start.
+glFogf(GL_FOG_END, 150.0f);  // Distance from camera where fog should end.
+glFogfv(GL_FOG_COLOR, fog_color);  // Set fog color to blend with scene. fog_color is an array of 
+                                   // color values.
+</pre></code>
+</td></tr></table>
+</p>
+<p><b>Key bindings</b><br>
+F1 - Switch texture on robot's torso.<br>
+F2 - Cycle through background scenes.<br>
+F3 - Switch fog on and off. Fog is on by default.<br>
+q -  Exit program.
+</body>
+</html>

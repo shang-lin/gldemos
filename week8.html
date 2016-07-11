@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<!-- Created on Jun 6, 2003 3:40:22 AM -->
+
+<html>
+   <head>
+      <title>
+         Week 8
+      </title>
+      <meta name="GENERATOR" content="Arachnophilia 5.2">
+      <meta namoe="FORMATTER" content="Arachnophilia 5.2">
+   </head>
+<body>
+<p>This week I experimented with fog and made some finishing touches to the Roboviewer program. 
+Last week's fog had been in <code>GL_LINEAR</code> mode, so the density setting had no effect. 
+I changed the fog mode to <code>GL_EXP</code> and added a feature allowing the user to change the
+fog density. </p>
+<p>I also changed all the scenes so that the ground  now extends to the entire width of the window. Previously,
+the ground looked like a strip or a runway. I did this by eliminating the left and right walls, extending
+the coordinates of the corners of the ground plane, and manipulating the camera coordinates.
+</p>
+<p>Finally, I started experimenting with depth cueing. Depth cueing uses <code>GL_LINEAR</code> fog to create
+the illusion of an object fading into the background. The fading illusion works when the fog color is close to the background
+color. Setting the <code>GL_FOG_START</code> and <code>GL_FOG_END</code> parameters changes when the object 
+starts to fade. I added depth cueing to the nova scene (the outer space background) and the scene with the
+plain blue background. Depth cueing is only enabled when regular <code>GL_EXP</code> fog is off. <!--(Note: A strange
+phenomenon occurs when depth cueing is enabled. The back of the robot's texture starts to disappear when the
+robot enters the background fog, but the front texture is still visible.)-->
+</p>
+
+<p><b>Key Bindings</b><br>
+F1 - Changes texture or robot's torso.<br>
+F2 - Changes scene.<br>
+F3 - Toggles <code>GL_EXP</code> fog on and off.<br>
+f - Increases fog density. Starting density is 0.<br>
+d - Decreases fog density. <br>
+c - Toggles depth cueing on and off. Only works in the nova scene and the plain blue sky scene when
+q - Quits program.
+<code>GL_EXP</code> fog is off.
+</p>
+   </body>
+</html>
